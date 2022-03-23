@@ -37,5 +37,26 @@ export default function useAsyncStorageCRUD() {
 
   }
   
-  return { toDoList, toDoCreate };
+  async function toDoUpdate(index, toDo) {
+    const newToDoList = [...toDoList];
+    // La fonction .splice permet ici, via le 3ème argument de remplacer 1 élément à l'index "index".
+    newToDoList.splice(index, 1, toDo);
+
+    // Stockage de la liste des TODO à jour
+    const jsonValue = JSON.stringify(newToDoList);
+    await AsyncStorage.setItem("toDoList", jsonValue);
+  }
+
+  async function toDoDelete(index) {
+    const newToDoList = [...toDoList];
+    // La fonction .splice permet de supprimer 1 élément à l'index "index". 
+    // SPLICE supprime car il n'y a pas de 3ème argument.
+    newToDoList.splice(index, 1);
+
+    // Stockage de la liste des TODO à jour
+    const jsonValue = JSON.stringify(newToDoList);
+    await AsyncStorage.setItem("toDoList", jsonValue);
+  }
+
+  return { toDoList, toDoCreate, toDoUpdate, toDoDelete };
 }
