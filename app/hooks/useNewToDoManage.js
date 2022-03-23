@@ -8,7 +8,7 @@ export default function useNewToDoManage() {
   const [title,setTitle] = React.useState('');
   const [description,setDescription] = React.useState('');
   
-  useAsyncStorageCRUD();
+  const { toDoCreate } = useAsyncStorageCRUD();
 
   function titleChange(e) {
     setTitle(e)
@@ -35,11 +35,13 @@ export default function useNewToDoManage() {
     }
   ] // FIN fieldsTab
 
-  function handleSubmit(){
+  async function handleSubmit(){
     if(title.length === 0) {
       return alert("The todo requires a title.")
     }
-    alert(title)
+    await toDoCreate({title,description});
+    setTitle('');
+    setDescription('');
   }
 
   return { fieldsTab, handleSubmit };

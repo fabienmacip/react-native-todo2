@@ -6,10 +6,11 @@ export default function useAsyncStorageCRUD() {
   
   const [toDoList, setToDoList] = React.useState([]);
 
+  // READ
   // Au lancement de la page uniquement (grâce au 2ème argument []),
   // On charge les données sauvegardées sur le téléphone.
   React.useEffect(() => {
-    // Ici, pas besoin d'écrire le mot-clé AWAYT devant AsyncStorage
+    // Ici, pas besoin d'écrire le mot-clé AWAIT devant AsyncStorage
     // Car useEffect() est déjà par défaut une fonction asynchrone.
     AsyncStorage.getItem('toDoList').then((savedToDoList) => {
       if(savedToDoList) {
@@ -21,6 +22,7 @@ export default function useAsyncStorageCRUD() {
     })
   }, []);
 
+  // CREATE
   async function toDoCreate(todo){
     
     // Sauvegarde de la todolist actuelle
@@ -37,6 +39,7 @@ export default function useAsyncStorageCRUD() {
 
   }
   
+  // UPDATE
   async function toDoUpdate(index, toDo) {
     const newToDoList = [...toDoList];
     // La fonction .splice permet ici, via le 3ème argument de remplacer 1 élément à l'index "index".
@@ -47,6 +50,7 @@ export default function useAsyncStorageCRUD() {
     await AsyncStorage.setItem("toDoList", jsonValue);
   }
 
+  // DELETE
   async function toDoDelete(index) {
     const newToDoList = [...toDoList];
     // La fonction .splice permet de supprimer 1 élément à l'index "index". 
