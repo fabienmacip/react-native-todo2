@@ -1,13 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import Navigation from '@navigation/Navigation.js';
-
-export default function App() {
+export default function ToDoCreate() {
   return (
-
-      <Navigation />
-
+    <View style={styles.container}>
+      <Text>To Do Create</Text>
+    </View>
   );
 }
 
