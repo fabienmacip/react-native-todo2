@@ -3,10 +3,13 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import Navigation from '@navigation/Navigation.js';
 
+import { AppStateProvider } from 'app/state/AppContext';
+
 export default function App() {
   return (
-
+    <AppStateProvider>
       <Navigation />
+    </AppStateProvider>
 
   );
 }

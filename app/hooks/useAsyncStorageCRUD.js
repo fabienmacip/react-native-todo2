@@ -2,9 +2,17 @@ import React from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import useAppContext from './useAppContext';
+
 export default function useAsyncStorageCRUD() {
-  
-  const [toDoList, setToDoList] = React.useState([]);
+  // La ligne ci-dessous n'est plus nécessaire dès qu'on utilise useAppContext.
+  // Il faut par contre bien remplacer la variable toDoList ET sa fonction de modification setToDoList
+
+  //const [toDoList, setToDoList] = React.useState([]);
+  const { state: {toDoList}, dispatch } = useAppContext();
+  function setToDoList(newList) {
+    dispatch({type: "TO_DO_LIST_CHANGE", toDoList: newList});
+  }
 
   // READ
   // Au lancement de la page uniquement (grâce au 2ème argument []),
@@ -37,6 +45,9 @@ export default function useAsyncStorageCRUD() {
     const jsonValue = JSON.stringify(newToDoList);
     await AsyncStorage.setItem("toDoList", jsonValue);
 
+    // Mise à jour du STATE GLOBAL
+    setToDoList(newToDoList);
+
   }
   
   // UPDATE
@@ -48,6 +59,9 @@ export default function useAsyncStorageCRUD() {
     // Stockage de la liste des TODO à jour
     const jsonValue = JSON.stringify(newToDoList);
     await AsyncStorage.setItem("toDoList", jsonValue);
+
+    // Mise à jour du STATE GLOBAL
+    setToDoList(newToDoList);
   }
 
   // DELETE
@@ -60,6 +74,9 @@ export default function useAsyncStorageCRUD() {
     // Stockage de la liste des TODO à jour
     const jsonValue = JSON.stringify(newToDoList);
     await AsyncStorage.setItem("toDoList", jsonValue);
+
+    // Mise à jour du STATE GLOBAL
+    setToDoList(newToDoList);
   }
 
   return { toDoList, toDoCreate, toDoUpdate, toDoDelete };
