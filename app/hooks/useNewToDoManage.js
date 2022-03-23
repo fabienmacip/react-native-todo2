@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
+import { Alert } from 'react-native-web';
 
 import useAsyncStorageCRUD from './useAsyncStorageCRUD';
 
@@ -40,8 +41,12 @@ export default function useNewToDoManage() {
       return alert("The todo requires a title.")
     }
     await toDoCreate({title,description});
+    
+    alert("TO DO créée :\n" + title);
+    
     setTitle('');
     setDescription('');
+
   }
 
   return { fieldsTab, handleSubmit };

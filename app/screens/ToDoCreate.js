@@ -11,6 +11,10 @@ export default function ToDoCreate({navigation}) {
   
   const { fieldsTab, handleSubmit } = useNewToDoManage();
 
+  function backHome() {
+    navigation.navigate("Home")
+  }
+
 
 /*   function handlePress() {
     navigation.navigate("Home")
@@ -22,6 +26,7 @@ export default function ToDoCreate({navigation}) {
         return <Input key={index} placeholder={placeholder} value={value} onChange={onChange} />
       })}
       <Button onPress={handleSubmit}>ToDo Add</Button>
+      <Button onPress={backHome}>Home</Button>
     </View>
   );
 }
