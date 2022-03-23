@@ -1,11 +1,15 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 
+import useAsyncStorageCRUD from './useAsyncStorageCRUD';
+
 export default function useNewToDoManage() {
   
   const [title,setTitle] = React.useState('');
   const [description,setDescription] = React.useState('');
   
+  useAsyncStorageCRUD();
+
   function titleChange(e) {
     setTitle(e)
   }
