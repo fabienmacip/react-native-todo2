@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { Children } from 'react/cjs/react.production.min';
+//import { Children } from 'react/cjs/react.production.min';
 
 export default function Button({children, onPress}) {
   
