@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import Input from '../components/UI/Input';
 import Button from '../components/UI/Button';
+import Title from '../components/UI/Title';
 
 import useNewToDoManage from '../hooks/useNewToDoManage';
 
@@ -22,6 +23,7 @@ export default function ToDoCreate({navigation}) {
   
   return (
     <View style={styles.container}>
+      <Title>Add a new task</Title>
       {fieldsTab.map(({value, onChange, placeholder},index) => {
         return <Input key={index} placeholder={placeholder} value={value} onChange={onChange} />
       })}
@@ -38,6 +40,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    backgroundColor: '#F7F3E9',
   },
 });

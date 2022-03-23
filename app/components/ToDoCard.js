@@ -10,7 +10,7 @@ export default function ToDoCard({title, description, checked, handleDelete, han
       <TouchableOpacity style={styles.checkBox} onPress={handleCheckChange}>
         {checked && <Ionicons name="checkmark" size={32} color='black' />}
       </TouchableOpacity>
-      <View>
+      <View style={{width: '100%'}}>
         <Text style={styles.title}>{title}</Text>
         <Text style={description === "" ? styles.descriptionEmpty : styles.description}>{description === "" ? "Pas de description" : description}</Text>
         <TouchableOpacity onPress={handleDelete}><Text style={styles.deleteText}>Delete</Text></TouchableOpacity>
@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     width: '100%',
     paddingBottom: 16,
-    marginBottom: 16,
+    marginBottom: 4,
+    marginTop: 12,
   },
   checkBox: {
     width: 40,
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
     color: 'rgba(0,122,255,1)',
     fontSize: 15,
     fontWeight: '600',
+    textAlign: 'left',
   },
 
 });

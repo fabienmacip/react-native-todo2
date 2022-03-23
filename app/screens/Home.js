@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, View, ScrollView, Alert } from 'react-native';
 
+import Title from '../components/UI/Title';
 import Button from '../components/UI/Button';
 
 import useAsyncStorageCRUD from '../hooks/useAsyncStorageCRUD';
@@ -16,44 +17,51 @@ export default function Home({navigation}) {
   return (
     <View style={styles.container}>
 
-      {toDoList.map(({title, description, checked}, index) => {
-        function handleDelete() {
+      <Title>My To-Do App</Title>
 
-          // Boîte de dialogue pour confirmer que l'USER veut supprimer la TODO.
-          Alert.alert("Supprimer","Etes-vous sûr de vouloir supprimer la todo\n< " + title + " > ?",
-          [
-            // The "Yes" button
-            {
-              text: "Yes",
-              onPress: () => {
-                toDoDelete(index);
-              },
-            },
-            // The "No" button
-            // Does nothing but dismiss the dialog when tapped
-            {
-              text: "No",
-            },
-          ]
-          );
-        }
+        <ScrollView>
 
-        function handleCheckChange() {
-          toDoUpdate(index, {title, description, checked: !checked})
-        }
-        return (
-          <ToDoCard
-            key={index}
-            title={title}
-            description={description}
-            checked={checked}
-            handleDelete={handleDelete}
-            handleCheckChange={handleCheckChange}
-          />
-        )
-      })}
+          {toDoList.map(({title, description, checked}, index) => {
+            function handleDelete() {
+
+              // Boîte de dialogue pour confirmer que l'USER veut supprimer la TODO.
+              Alert.alert("Supprimer","Etes-vous sûr de vouloir supprimer la todo\n< " + title + " > ?",
+              [
+                // The "Yes" button
+                {
+                  text: "Yes",
+                  onPress: () => {
+                    toDoDelete(index);
+                  },
+                },
+                // The "No" button
+                // Does nothing but dismiss the dialog when tapped
+                {
+                  text: "No",
+                },
+              ]
+              );
+            }
+
+            function handleCheckChange() {
+              toDoUpdate(index, {title, description, checked: !checked})
+            }
+            return (
+              <ToDoCard
+                key={index}
+                title={title}
+                description={description}
+                checked={checked}
+                handleDelete={handleDelete}
+                handleCheckChange={handleCheckChange}
+              />
+            )
+          })}
+
+        </ScrollView>
 
       <Button onPress={handlePress}>+ Add a ToDo</Button>
+
     </View>
   );
 }
@@ -64,6 +72,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 16,
+    padding: 12,
+    width: 'auto',
   },
 });
