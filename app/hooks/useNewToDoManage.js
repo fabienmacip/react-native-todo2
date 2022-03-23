@@ -40,7 +40,7 @@ export default function useNewToDoManage() {
     if(title.length === 0) {
       return alert("The todo requires a title.")
     }
-    await toDoCreate({title,description});
+    await toDoCreate({title, description, checked: false});
     
     alert("TO DO créée :\n" + title);
     

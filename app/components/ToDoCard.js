@@ -1,11 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function ToDoCard({title, description, handleDelete}) {
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+export default function ToDoCard({title, description, checked, handleDelete, handleCheckChange}) {
   
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.checkBox}></TouchableOpacity>
+      <TouchableOpacity style={styles.checkBox} onPress={handleCheckChange}>
+        {checked && <Ionicons name="checkmark" size={32} color='black' />}
+      </TouchableOpacity>
       <View>
         <Text style={styles.title}>{title}</Text>
         <Text style={description === "" ? styles.descriptionEmpty : styles.description}>{description === "" ? "Pas de description" : description}</Text>
@@ -31,6 +35,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(60,60,67,0.6)',
     borderRadius: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
     color: 'black',

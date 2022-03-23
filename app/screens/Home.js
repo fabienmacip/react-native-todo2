@@ -8,7 +8,7 @@ import useAsyncStorageCRUD from '../hooks/useAsyncStorageCRUD';
 import ToDoCard from '../components/ToDoCard';
 
 export default function Home({navigation}) {
-  const { toDoList, toDoDelete } = useAsyncStorageCRUD();
+  const { toDoList, toDoUpdate, toDoDelete } = useAsyncStorageCRUD();
   function handlePress() {
     navigation.navigate("ToDoCreate")
   }
@@ -16,7 +16,7 @@ export default function Home({navigation}) {
   return (
     <View style={styles.container}>
 
-      {toDoList.map(({title, description}, index) => {
+      {toDoList.map(({title, description, checked}, index) => {
         function handleDelete() {
 
           // Boîte de dialogue pour confirmer que l'USER veut supprimer la TODO.
@@ -37,12 +37,18 @@ export default function Home({navigation}) {
           ]
           );
         }
+
+        function handleCheckChange() {
+          toDoUpdate(index, {title, description, checked: !checked})
+        }
         return (
           <ToDoCard
             key={index}
             title={title}
             description={description}
+            checked={checked}
             handleDelete={handleDelete}
+            handleCheckChange={handleCheckChange}
           />
         )
       })}
