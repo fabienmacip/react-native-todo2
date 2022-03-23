@@ -5,6 +5,8 @@ import Button from '../components/UI/Button';
 
 import useAsyncStorageCRUD from '../hooks/useAsyncStorageCRUD';
 
+import ToDoCard from '../components/ToDoCard';
+
 export default function Home({navigation}) {
   const { toDoList } = useAsyncStorageCRUD();
   function handlePress() {
@@ -16,10 +18,11 @@ export default function Home({navigation}) {
 
       {toDoList.map(({title, description}, index) => {
         return (
-          <View key={index}>
-            <Text>{title}</Text>
-            <Text>{description === "" ? "No description" : description}</Text>
-          </View>
+          <ToDoCard
+            key={index}
+            title={title}
+            description={description}
+          />
         )
       })}
 
